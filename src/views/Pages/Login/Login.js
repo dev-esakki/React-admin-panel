@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { Alert, Button, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 import * as AuthenticateAPI from '../../../services/AuthenticationAPI';
-import * as toastr from '../../../services/NotifyContext'
-import { toast } from 'react-toastify';
+
 //import useForm from 'react-hook-form'
 
 
