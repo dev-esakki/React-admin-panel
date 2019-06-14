@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, Button, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
+import { Alert, Button, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row, FormText } from 'reactstrap';
 import * as AuthenticateAPI from '../../../services/AuthenticationAPI';
 
 //import useForm from 'react-hook-form'
@@ -32,8 +32,7 @@ export class Login extends Component  {
       fields[e.target.name] = e.target.value;        
       this.setState({
           fields
-      })   
-      this.validateForm()     
+      })      
     }
     
 
@@ -103,9 +102,9 @@ export class Login extends Component  {
                             <i className="icon-user"></i>
                           </InputGroupText>
                         </InputGroupAddon>
-                        <Input  type="text" placeholder="Username" name="username" autoComplete="off" value={this.state.fields.username || ''} onChange={this.handleChange} />
+                        <Input  type="text" placeholder="Username" name="username" autoComplete="off" value={this.state.fields.username || ''} onChange={this.handleChange} />                        
                       </InputGroup>
-                        <span className="errorSpan">{this.state.errors.username}</span>
+                      <FormText color="danger">{this.state.errors.username}</FormText>
 
                       <InputGroup className="mb-4">
                         <InputGroupAddon addonType="prepend">
@@ -115,7 +114,7 @@ export class Login extends Component  {
                         </InputGroupAddon>
                         <Input  type="password" placeholder="password" name="password" autoComplete="off" value={this.state.fields.password || ''} onChange={this.handleChange} /> 
                       </InputGroup>
-                        <div className="errorSpan">{this.state.errors.password}</div>       
+                      <FormText color="danger">{this.state.errors.password}</FormText>
                                          
                       <Row>
                         <Col xs="6">

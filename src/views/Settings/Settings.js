@@ -30,10 +30,10 @@ class Settings extends Component {
           <BasicInfo />
         </TabPane>
         <TabPane tabId="2">
-         <ChangePwd />
+          <ChangePwd />
         </TabPane>
         <TabPane tabId="3">
-            <SiteConfig />
+          <SiteConfig />
         </TabPane>
       </>
     );
