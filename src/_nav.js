@@ -34,6 +34,11 @@ export default {
       icon: 'icon-puzzle',
     },
     {
+      name: 'Email Templates',
+      url: '/templates',
+      icon: 'icon-puzzle',
+    },
+    {
       name: 'Colors',
       url: '/theme/colors',
       icon: 'icon-drop',

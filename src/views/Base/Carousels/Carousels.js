@@ -157,7 +157,7 @@ class Carousels extends Component {
             <FormGroup>                
               <ImageUploader
               withIcon={true}
-              buttonText='Banner1'
+              buttonText='Banners'
               onChange={this.onDrop}
               imgExtension={['.jpg', '.gif', '.png', '.gif', '.jpeg']}
               maxFileSize={5242880}

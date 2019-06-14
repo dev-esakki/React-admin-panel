@@ -36,6 +36,8 @@ const Widgets = React.lazy(() => import('./views/Widgets/Widgets'));
 const Users = React.lazy(() => import('./views/Users/Users'));
 const User = React.lazy(() => import('./views/Users/User'));
 const Settings = React.lazy(() => import('./views/Settings/Settings'))
+const EmailList = React.lazy(() => import('./views/EmailTemplates/EmailList'))
+const EmailView = React.lazy(() => import('./views/EmailTemplates/EmailView'))
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
@@ -82,6 +84,8 @@ const routes = [
 
   { path: '/settings', exact: true, name: 'Settings', component: Settings},
   { path: '/banners', name: 'Carousel', component: Carousels },
+  { path: '/templates', name: 'Email-Templates', component: EmailList },
+  { path: '/templateView/:id', name: 'Email-Templates', component: EmailView },
 
 ];
 
