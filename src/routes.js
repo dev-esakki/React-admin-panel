@@ -51,7 +51,6 @@ const routes = [
   { path: '/base/tables', name: 'Tables', component: Tables },
   { path: '/base/tabs', name: 'Tabs', component: Tabs },
   { path: '/base/breadcrumbs', name: 'Breadcrumbs', component: Breadcrumbs },
-  { path: '/base/carousels', name: 'Carousel', component: Carousels },
   { path: '/base/collapses', name: 'Collapse', component: Collapses },
   { path: '/base/dropdowns', name: 'Dropdowns', component: Dropdowns },
   { path: '/base/jumbotrons', name: 'Jumbotrons', component: Jumbotrons },
@@ -81,7 +80,9 @@ const routes = [
   { path: '/users', exact: true,  name: 'Users', component: Users },
   { path: '/users/:id', exact: true, name: 'User Details', component: User },
 
-  { path: '/settings', exact: true, name: 'Settings', component: Settings}
+  { path: '/settings', exact: true, name: 'Settings', component: Settings},
+  { path: '/banners', name: 'Carousel', component: Carousels },
+
 ];
 
 export default routes;

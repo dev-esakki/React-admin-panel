@@ -1,34 +1,46 @@
 import React, { Component } from 'react';
-import { Card, CardBody, CardHeader, Carousel, CarouselCaption, CarouselControl, CarouselIndicators, CarouselItem, Col, Row } from 'reactstrap';
-
-const items = [
-  {
-    src: 'data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1607923e7e2%20text%20%7B%20fill%3A%23555%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1607923e7e2%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22285.9296875%22%20y%3D%22217.75625%22%3EFirst%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E',
-    altText: 'Slide 1',
-    caption: 'Slide 1',
-  },
-  {
-    src: 'data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_15ba800aa20%20text%20%7B%20fill%3A%23444%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_15ba800aa20%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23666%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22247.3203125%22%20y%3D%22218.3%22%3ESecond%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E',
-    altText: 'Slide 2',
-    caption: 'Slide 2',
-  },
-  {
-    src: 'data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_15ba800aa21%20text%20%7B%20fill%3A%23333%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_15ba800aa21%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23555%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22277%22%20y%3D%22218.3%22%3EThird%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E',
-    altText: 'Slide 3',
-    caption: 'Slide 3',
-  },
-];
+import { Card, CardBody, CardHeader, Carousel, CarouselCaption, CarouselControl, CarouselIndicators, CarouselItem, Col, Row, Form, FormGroup, Label, Input, FormText, Button } from 'reactstrap';
+import ImageUploader from 'react-images-upload';
 
 class Carousels extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { activeIndex: 0 };
+    this.state = {
+       activeIndex: 0,
+       items : [
+        {
+          src: 'http://www.bhasinassociates.org/images/PFconsultantdelhi.jpg',
+          altText: 'Slide 1',
+          caption: 'Slide 1',
+        },
+        {
+          src: 'https://mipstech.files.wordpress.com/2018/02/homepage-banner-06-01_2356x0.png',
+          altText: 'Slide 2',
+          caption: 'Slide 2',
+        },
+        {
+          src: 'https://everydaygrimeuk.com/wp-content/uploads/2014/08/banner-1.jpg',
+          altText: 'Slide 3',
+          caption: 'Slide 3',
+        },
+      ],
+      pictures: [],
+      fileUpload : false
+     };
     this.next = this.next.bind(this);
     this.previous = this.previous.bind(this);
     this.goToIndex = this.goToIndex.bind(this);
     this.onExiting = this.onExiting.bind(this);
     this.onExited = this.onExited.bind(this);
+  }
+
+  onDrop = (picture) => {
+      this.setState({
+          pictures: this.state.pictures.concat(picture),
+          fileUpload : true
+      });
+      
   }
 
   onExiting() {
@@ -41,13 +53,13 @@ class Carousels extends Component {
 
   next() {
     if (this.animating) return;
-    const nextIndex = this.state.activeIndex === items.length - 1 ? 0 : this.state.activeIndex + 1;
+    const nextIndex = this.state.activeIndex === this.state.items.length - 1 ? 0 : this.state.activeIndex + 1;
     this.setState({ activeIndex: nextIndex });
   }
 
   previous() {
     if (this.animating) return;
-    const nextIndex = this.state.activeIndex === 0 ? items.length - 1 : this.state.activeIndex - 1;
+    const nextIndex = this.state.activeIndex === 0 ? this.state.items.length - 1 : this.state.activeIndex - 1;
     this.setState({ activeIndex: nextIndex });
   }
 
@@ -56,10 +68,34 @@ class Carousels extends Component {
     this.setState({ activeIndex: newIndex });
   }
 
+/*   componentDidUpdate(prevProps, prevState) {
+    if(this.state.fileUpload) {
+      this.setState({
+        items : [
+          {
+            src: 'http://sonyphotog.com/photos/globalmedicalco/25/124181.jpg',
+            altText: 'Slide 1',
+            caption: 'Slide 1',
+          },
+          {
+            src: 'https://images3.alphacoders.com/823/82317.jpg',
+            altText: 'Slide 2',
+            caption: 'Slide 2',
+          },
+          {
+            src: 'http://images.animalpicturesociety.com/images/om/3_2_493_1024x768-wallpaper-cb1267710746.jpg',
+            altText: 'Slide 3',
+            caption: 'Slide 3',
+          },
+        ],
+      })
+    }
+  } */
+
   render() {
     const { activeIndex } = this.state;
 
-    const slides = items.map((item) => {
+    const slides = this.state.items.map((item) => {
       return (
         <CarouselItem onExiting={this.onExiting} onExited={this.onExited} key={item.src}>
           <img className="d-block w-100" src={item.src} alt={item.altText} />
@@ -67,7 +103,7 @@ class Carousels extends Component {
       );
     });
 
-    const slides2 = items.map((item) => {
+    const slides2 = this.state.items.map((item) => {
       return (
         <CarouselItem
           onExiting={this.onExiting}
@@ -86,7 +122,7 @@ class Carousels extends Component {
           <Col xs="12" xl="6">
             <Card>
               <CardHeader>
-                <i className="fa fa-align-justify"></i><strong>Carousel</strong>
+                <i className="fa fa-align-justify"></i><strong>Preview</strong>
                 <div className="card-header-actions">
                   <a href="https://reactstrap.github.io/components/carousel/" rel="noreferrer noopener" target="_blank" className="card-header-action">
                     <small className="text-muted">docs</small>
@@ -103,18 +139,36 @@ class Carousels extends Component {
           <Col xs="12" xl="6">
             <Card>
               <CardHeader>
-                <i className="fa fa-align-justify"></i><strong>Carousel</strong>
+                <i className="fa fa-align-justify"></i><strong>Banners</strong>
               </CardHeader>
               <CardBody>
                 <Carousel activeIndex={activeIndex} next={this.next} previous={this.previous}>
-                  <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
+                  <CarouselIndicators items={this.state.items} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
                   {slides2}
                   <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
                   <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
                 </Carousel>
               </CardBody>
             </Card>
-          </Col>
+          </Col>          
+        </Row>
+        <Row>
+          <Col xs="9" xl="9">
+            <FormGroup>                
+              <ImageUploader
+              withIcon={true}
+              buttonText='Banner1'
+              onChange={this.onDrop}
+              imgExtension={['.jpg', '.gif', '.png', '.gif', '.jpeg']}
+              maxFileSize={5242880}
+              withPreview={true}
+              />
+              <FormText color="muted">
+                This is some placeholder block-level help text for the above input.
+                It's a bit lighter and easily wraps to a new line.
+              </FormText>
+            </FormGroup> 
+          </Col> 
         </Row>
       </div>
     );

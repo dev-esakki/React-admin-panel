@@ -29,6 +29,11 @@ export default {
       icon: 'icon-settings',
     },
     {
+      name: 'Banners',
+      url: '/banners',
+      icon: 'icon-puzzle',
+    },
+    {
       name: 'Colors',
       url: '/theme/colors',
       icon: 'icon-drop',
@@ -60,12 +65,7 @@ export default {
           name: 'Cards',
           url: '/base/cards',
           icon: 'icon-puzzle',
-        },
-        {
-          name: 'Carousels',
-          url: '/base/carousels',
-          icon: 'icon-puzzle',
-        },
+        },      
         {
           name: 'Collapses',
           url: '/base/collapses',
