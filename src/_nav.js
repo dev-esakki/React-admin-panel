@@ -31,12 +31,17 @@ export default {
     {
       name: 'Banners',
       url: '/banners',
-      icon: 'icon-puzzle',
+      icon: 'icon-film',
     },
     {
       name: 'Email Templates',
       url: '/templates',
-      icon: 'icon-puzzle',
+      icon: 'icon-envelope',
+    },
+    {
+      name: 'CMS Pages',
+      url: '/cmsPages',
+      icon: 'icon-note',
     },
     {
       name: 'Colors',
@@ -239,10 +244,10 @@ export default {
     {
       divider: true,
     },
-    {
+   /*  {
       title: true,
       name: 'Extras',
-    },
+    }, */
  /*    {
       name: 'Pages',
       url: '/pages',
