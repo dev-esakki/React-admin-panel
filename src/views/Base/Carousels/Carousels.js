@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardBody, CardHeader, Carousel, CarouselCaption, CarouselControl, CarouselIndicators, CarouselItem, Col, Row, Form, FormGroup, Label, Input, FormText, Button } from 'reactstrap';
+import { Card, CardBody, CardHeader, Carousel, CarouselCaption, CarouselControl, CarouselIndicators, CarouselItem, Col, Row,  FormGroup, FormText } from 'reactstrap';
 import ImageUploader from 'react-images-upload';
 
 class Carousels extends Component {

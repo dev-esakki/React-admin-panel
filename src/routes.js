@@ -40,6 +40,8 @@ const EmailList = React.lazy(() => import('./views/EmailTemplates/EmailList'))
 const EmailView = React.lazy(() => import('./views/EmailTemplates/EmailView'))
 const cmsPages  =  React.lazy(() => import('./views/cmsPages/cmsPages'))
 const cmsView  =  React.lazy(() => import('./views/cmsPages/cmsView'))
+const faqList  =  React.lazy(() => import('./views/FAQ/faqList'))
+const faqView  =  React.lazy(() => import('./views/FAQ/faqView'))
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
@@ -90,6 +92,8 @@ const routes = [
   { path: '/templateView/:id', name: 'Email-Templates', component: EmailView },
   { path: '/cmsPages', name: 'CMS-Pages', component: cmsPages },
   { path: '/cmsView/:id', name: 'CMS-Pages', component: cmsView },
+  { path: '/faq', name: 'FAQ-Pages', component: faqList },
+  { path: '/faqView/:id', name: 'FAQ-Pages', component: faqView },
 
 
 ];

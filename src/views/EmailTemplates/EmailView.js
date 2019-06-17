@@ -20,12 +20,11 @@ export class EmailView extends Component {
 
     componentDidMount() {
         const EmailDetails = Templates.find( email => email.id.toString() === this.props.match.params.id)
-
-        const EmailNotFound = EmailDetails ? Object.entries(EmailDetails) : [['id', (<span><i className="text-muted icon-ban"></i> Not found</span>)]]
-
-        this.setState({
-            content: EmailDetails.content
-        })
+        if(EmailDetails) {
+            this.setState({
+                content: EmailDetails.content
+            })
+        }
 
     }
 
@@ -87,62 +86,81 @@ export class EmailView extends Component {
     render() {
         const EmailDetails = Templates.find( email => email.id.toString() === this.props.match.params.id)
 
-        const EmailNotFound = EmailDetails ? Object.entries(EmailDetails) : [['id', (<span><i className="text-muted icon-ban"></i> Not found</span>)]]
+        const EmailNotFound = EmailDetails ? Object.entries(EmailDetails) : [['', (<span> Not found</span>)]]
 
-        return (
+        if(EmailDetails || typeof EmailDetails !== 'undefined') {
+
+            return (
+                <div className="animated fadeIn">
+                    <Row>
+                        <Col lg={12}>
+                            <Card>
+                            <CardHeader>
+                                <strong><i className="icon-info pr-1"></i>Template Name: {EmailDetails.name}</strong>
+                                <Alert color={this.state.Batch} isOpen={this.state.visible} toggle={this.onDismiss}>
+                                {this.state.MsgContent}
+                                </Alert>
+                            </CardHeader>
+                            <CardBody>
+                                <Form action="" method="post" encType="multipart/form-data" className="form-horizontal">
+                                <FormGroup row>
+                                    <Col md="3">
+                                    <Label htmlFor="text-input">Name</Label>
+                                    </Col>
+                                    <Col xs="12" md="9">
+                                    <Input type="text" id="text-input" name="Name" placeholder="Name" value={EmailDetails.name}  disabled/>
+                                    </Col>
+                                </FormGroup>
+                                <FormGroup row>
+                                    <Col md="3">
+                                    <Label htmlFor="text-input">Template</Label>
+                                    </Col>
+                                    <Col xs="12" md="9">
+                                        <CKEditor 
+                                            activeClass="p10" 
+                                            content={this.state.content} 
+                                            events={{
+                                                "blur": this.onBlur,
+                                                "afterPaste": this.afterPaste,
+                                                "change": this.onChange
+                                            }}
+                                        />
+                                        <FormText color="danger">{this.state.errors.content}</FormText> 
+                                    </Col>
+                                </FormGroup>     
+                                <FormGroup row>
+                                    <Col md="3">
+                                    
+                                    </Col>
+                                    <Col xs="12" md="9">
+                                        <Button  outline color="primary" onClick={this.onSubmit}><i className="fa fa-dot-circle-o"></i> Submit</Button>&nbsp;&nbsp;&nbsp;
+                                        <Button type="reset" outline color="danger" onClick={this.cancel}><i className="fa fa-ban"></i> Cancel</Button>
+                                    </Col>
+                                </FormGroup>                              
+                                </Form>
+                            </CardBody>
+                            </Card>
+                        </Col>
+                        </Row>                 
+                </div>
+            )
+       } else {
+           return (
             <div className="animated fadeIn">
                 <Row>
                     <Col lg={12}>
                         <Card>
-                        <CardHeader>
-                            <strong><i className="icon-info pr-1"></i>Template Name: {this.props.match.params.id}</strong>
-                            <Alert color={this.state.Batch} isOpen={this.state.visible} toggle={this.onDismiss}>
-                            {this.state.MsgContent}
-                            </Alert>
-                        </CardHeader>
-                        <CardBody>
-                            <Form action="" method="post" encType="multipart/form-data" className="form-horizontal">
-                            <FormGroup row>
-                                <Col md="3">
-                                <Label htmlFor="text-input">Name</Label>
-                                </Col>
-                                <Col xs="12" md="9">
-                                <Input type="text" id="text-input" name="Name" placeholder="Name" value={EmailDetails.name}  disabled/>
-                                </Col>
-                            </FormGroup>
-                            <FormGroup row>
-                                <Col md="3">
-                                <Label htmlFor="text-input">Template</Label>
-                                </Col>
-                                <Col xs="12" md="9">
-                                    <CKEditor 
-                                        activeClass="p10" 
-                                        content={this.state.content} 
-                                        events={{
-                                            "blur": this.onBlur,
-                                            "afterPaste": this.afterPaste,
-                                            "change": this.onChange
-                                        }}
-                                    />
-                                     <FormText color="danger">{this.state.errors.content}</FormText> 
-                                </Col>
-                            </FormGroup>     
-                            <FormGroup row>
-                                <Col md="3">
-                                
-                                </Col>
-                                <Col xs="12" md="9">
-                                    <Button  outline color="primary" onClick={this.onSubmit}><i className="fa fa-dot-circle-o"></i> Submit</Button>&nbsp;&nbsp;&nbsp;
-                                    <Button type="reset" outline color="danger" onClick={this.cancel}><i className="fa fa-ban"></i> Cancel</Button>
-                                </Col>
-                            </FormGroup>                              
-                            </Form>
-                        </CardBody>
+                            <CardHeader>
+                                <strong> <Alert color="danger" isOpen={true} >
+                                {EmailNotFound} 
+                                </Alert> </strong>                               
+                            </CardHeader>
                         </Card>
                     </Col>
-                    </Row>                 
+                </Row>
             </div>
-        )
+           )
+       }
     }
 }
 

@@ -44,6 +44,16 @@ export default {
       icon: 'icon-note',
     },
     {
+      name: 'FAQ',
+      url: '/faq',
+      icon: 'icon-question',
+    },
+    {
+      name: 'Contact Us',
+      url: '/contactUs',
+      icon: 'icon-bubbles',
+    },
+    {
       name: 'Colors',
       url: '/theme/colors',
       icon: 'icon-drop',

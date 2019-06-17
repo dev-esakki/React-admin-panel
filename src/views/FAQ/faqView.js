@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import CKEditor from "react-ckeditor-component";
-import cmsPagesList from './cmsList'
+import faqs from './faq'
 import { Card, CardBody, CardHeader, Col, Row, Form, FormGroup, Label, Input, FormText, Button, Alert } from 'reactstrap';
 
 
-export class cmsView extends Component {
+export class faqView extends Component {
     constructor(props) {
         super(props)
     
@@ -19,10 +19,10 @@ export class cmsView extends Component {
     }
 
     componentDidMount() {
-        const cmsDetails = cmsPagesList.find( email => email.id.toString() === this.props.match.params.id)
-        if(cmsDetails) { 
+        const faqDetails = faqs.find( email => email.id.toString() === this.props.match.params.id)
+        if(faqDetails) {
             this.setState({
-                content: cmsDetails.content
+                content: faqDetails.content
             })
         }
     }
@@ -32,7 +32,7 @@ export class cmsView extends Component {
     }
 
     cancel = () => {
-        this.props.history.push('/cmsPages')
+        this.props.history.push('/faq')
     }
 
     updateContent = (newContent) => {
@@ -53,7 +53,7 @@ export class cmsView extends Component {
         if (this.validateForm()) {
             this.setState({
                 visible: true,
-                MsgContent : "Cms updated Succesfully",
+                MsgContent : "FAQ updated Succesfully",
                 Batch : 'success'
               })
         }
@@ -83,17 +83,18 @@ export class cmsView extends Component {
     }
 
     render() {
-        const cmsDetails = cmsPagesList.find( email => email.id.toString() === this.props.match.params.id)
+        const faqDetails = faqs.find( email => email.id.toString() === this.props.match.params.id)
 
-        const cmsNotFound = cmsDetails ? Object.entries(cmsDetails) : [['', (<span> Not found</span>)]]
-        if(cmsDetails) {
+        const faqNotFound = faqDetails ? Object.entries(faqDetails) : [['', (<span> Not found</span>)]]
+
+        if(faqDetails) { 
             return (
                 <div className="animated fadeIn">
                     <Row>
                         <Col lg={12}>
                             <Card>
                             <CardHeader>
-                                <strong><i className="icon-info pr-1"></i>CMS Name: {cmsDetails.name}</strong>
+                                <strong><i className="icon-info pr-1"></i>FAQ Name: {faqDetails.name}</strong>
                                 <Alert color={this.state.Batch} isOpen={this.state.visible} toggle={this.onDismiss}>
                                 {this.state.MsgContent}
                                 </Alert>
@@ -105,7 +106,7 @@ export class cmsView extends Component {
                                     <Label htmlFor="text-input">Name</Label>
                                     </Col>
                                     <Col xs="12" md="9">
-                                    <Input type="text" id="text-input" name="Name" placeholder="Name" value={cmsDetails.name}  disabled/>
+                                    <Input type="text" id="text-input" name="Name" placeholder="Name" value={faqDetails.name}  disabled/>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -149,16 +150,16 @@ export class cmsView extends Component {
                             <Card>
                                 <CardHeader>
                                     <strong> <Alert color="danger" isOpen={true} >
-                                    {cmsNotFound} 
+                                    {faqNotFound} 
                                     </Alert> </strong>                               
                                 </CardHeader>
                             </Card>
                         </Col>
                     </Row>
                 </div>
-               )
+            )
         }
     }
 }
 
-export default cmsView
+export default faqView
