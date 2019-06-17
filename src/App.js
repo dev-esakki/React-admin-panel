@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { HashRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
 // import { renderRoutes } from 'react-router-config';
 import './App.scss';
 import 'react-toastify/dist/ReactToastify.css';
@@ -14,6 +14,42 @@ const Login = React.lazy(() => import('./views/Pages/Login'));
 const Register = React.lazy(() => import('./views/Pages/Register'));
 const Page404 = React.lazy(() => import('./views/Pages/Page404'));
 const Page500 = React.lazy(() => import('./views/Pages/Page500'));
+
+//Authentication
+const isAuthenticated = () => {
+  const storage = localStorage.getItem('token')
+  return storage ? true : false; 
+}
+
+
+const AuthenticatedRoute = ({component : Component, ...rest}) => {    
+    return (
+        <Route {...rest} render= { 
+            props => {                    
+            if(!!localStorage.getItem('token')){
+                return <Component {...props}/>
+            } else {
+                return <Redirect to='/login' />
+            }
+        }}/>
+    )
+}
+
+
+const UnauthenticatedRoute = ({component : Component, ...rest}) => {
+    return (
+        <Route {...rest} render={
+             props => {
+                 if(!(!!localStorage.getItem('token'))) {
+                    return <Component {...props}/>
+                 } else {
+                    return <Redirect to='/dashboard' />
+                 }
+             }
+        }/>
+    )
+}
+// <ProtectedRouteBeforeLogin path="/signin" component={FormSignin} />
 
 class App extends Component {
 

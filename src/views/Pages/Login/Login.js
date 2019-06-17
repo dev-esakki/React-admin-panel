@@ -46,6 +46,7 @@ export class Login extends Component  {
               MsgContent : res.Msg,
               Batch : 'success'
             })
+            localStorage.setItem("Token", "1");
             this.props.history.push('/dashboard')
           } else {
             this.setState({
