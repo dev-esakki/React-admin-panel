@@ -78,7 +78,7 @@ export class contactsView extends Component {
         this.setState({
             errors: errors
         });
-
+ 
         return formIsValid;
     }
       
