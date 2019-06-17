@@ -42,6 +42,8 @@ const cmsPages  =  React.lazy(() => import('./views/cmsPages/cmsPages'))
 const cmsView  =  React.lazy(() => import('./views/cmsPages/cmsView'))
 const faqList  =  React.lazy(() => import('./views/FAQ/faqList'))
 const faqView  =  React.lazy(() => import('./views/FAQ/faqView'))
+const contactsList  =  React.lazy(() => import('./views/ContactUs/ContactList'))
+const contactsView  =  React.lazy(() => import('./views/ContactUs/ContactView'))
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
@@ -94,6 +96,8 @@ const routes = [
   { path: '/cmsView/:id', name: 'CMS-Pages', component: cmsView },
   { path: '/faq', name: 'FAQ-Pages', component: faqList },
   { path: '/faqView/:id', name: 'FAQ-Pages', component: faqView },
+  { path: '/contactUs', name: 'Contact-Us', component: contactsList },
+  { path: '/contact/:id', name: 'Contact-Us', component: contactsView },
 
 
 ];

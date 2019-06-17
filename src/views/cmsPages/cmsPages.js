@@ -41,7 +41,7 @@ export class cmsPages extends Component {
                     <thead>
                         <tr>
                         <th scope="col">id</th>
-                        <th scope="col">Template</th>
+                        <th scope="col">Name</th>
                         <th scope="col">Created-Date</th>
                         <th scope="col">status</th>
                         </tr>

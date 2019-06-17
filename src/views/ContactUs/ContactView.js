@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
 import CKEditor from "react-ckeditor-component";
-import cmsPagesList from './cmsList'
+import contactsList from './Contacts'
 import { Card, CardBody, CardHeader, Col, Row, Form, FormGroup, Label, Input, FormText, Button, Alert } from 'reactstrap';
 
 
-export class cmsView extends Component {
+export class contactsView extends Component {
     constructor(props) {
         super(props)
     
         this.state = {
             content: '',
+            Reply : '',
             fields : {},
             errors : {},
             visible: false,
@@ -19,10 +20,10 @@ export class cmsView extends Component {
     }
 
     componentDidMount() {
-        const cmsDetails = cmsPagesList.find( email => email.id.toString() === this.props.match.params.id)
-        if(cmsDetails) { 
+        const contactsDetails = contactsList.find( email => email.id.toString() === this.props.match.params.id)
+        if(contactsDetails) { 
             this.setState({
-                content: cmsDetails.content
+                content: contactsDetails.content
             })
         }
     }
@@ -53,7 +54,7 @@ export class cmsView extends Component {
         if (this.validateForm()) {
             this.setState({
                 visible: true,
-                MsgContent : "Cms updated Succesfully",
+                MsgContent : "Contacts updated Succesfully",
                 Batch : 'success'
               })
         }
@@ -61,12 +62,19 @@ export class cmsView extends Component {
 
     validateForm = () => {
         let content = this.state.content;
+        let Reply = this.state.Reply;
         let errors = {};
         let formIsValid = true;
         if(!content) {
             formIsValid = false;
-            errors["content"] = "*Please enter content.";
+            errors["content"] = "*Please enter Description.";
         }
+
+        if(!Reply) {
+            formIsValid = false;
+            errors["Reply"] = "*Please enter Reply.";
+        }
+
         this.setState({
             errors: errors
         });
@@ -82,18 +90,34 @@ export class cmsView extends Component {
     console.log("afterPaste event called with event info: ", evt);
     }
 
-    render() {
-        const cmsDetails = cmsPagesList.find( email => email.id.toString() === this.props.match.params.id)
+    onBlurReply = (evt) => {
+        console.log("onBlur event called with event info: ", evt);
+    }
+    
+    afterPasteReply = (evt) => {
+        console.log("afterPaste event called with event info: ", evt);
+    }
 
-        const cmsNotFound = cmsDetails ? Object.entries(cmsDetails) : [['', (<span> Not found</span>)]]
-        if(cmsDetails) {
+    onChangeReply = (evt) => {
+        console.log("onChange fired with event info: ", evt);
+        var newContent = evt.editor.getData();
+        this.setState({
+          Reply: newContent
+        })
+    }
+
+    render() {        
+        const contactsDetails = contactsList.find( email => email.id.toString() === this.props.match.params.id)
+
+        const cmsNotFound = contactsDetails ? Object.entries(contactsDetails) : [['', (<span> Not found</span>)]]
+        if(contactsDetails) {
             return (
                 <div className="animated fadeIn">
                     <Row>
                         <Col lg={12}>
                             <Card>
                             <CardHeader>
-                                <strong><i className="icon-info pr-1"></i>CMS Name: {cmsDetails.name}</strong>
+                                <strong><i className="icon-info pr-1"></i>Contact Name: {contactsDetails.name}</strong>
                                 <Alert color={this.state.Batch} isOpen={this.state.visible} toggle={this.onDismiss}>
                                 {this.state.MsgContent}
                                 </Alert>
@@ -105,7 +129,7 @@ export class cmsView extends Component {
                                     <Label htmlFor="text-input">Name</Label>
                                     </Col>
                                     <Col xs="12" md="9">
-                                    <Input type="text" id="text-input" name="Name" placeholder="Name" value={cmsDetails.name}  disabled/>
+                                    <Input type="text" id="text-input" name="Name" placeholder="Name" value={contactsDetails.name}  disabled/>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -123,6 +147,23 @@ export class cmsView extends Component {
                                             }}
                                         />
                                         <FormText color="danger">{this.state.errors.content}</FormText> 
+                                    </Col>
+                                </FormGroup>    
+                                <FormGroup row>
+                                    <Col md="3">
+                                    <Label htmlFor="text-input">Reply</Label>
+                                    </Col>
+                                    <Col xs="12" md="9">
+                                        <CKEditor 
+                                            activeClass="p10" 
+                                            content={this.state.Reply} 
+                                            events={{
+                                                "blur": this.onBlurReply,
+                                                "afterPaste": this.afterPasteReply,
+                                                "change": this.onChangeReply
+                                            }}
+                                        />
+                                        <FormText color="danger">{this.state.errors.Reply}</FormText> 
                                     </Col>
                                 </FormGroup>     
                                 <FormGroup row>
@@ -161,4 +202,4 @@ export class cmsView extends Component {
     }
 }
 
-export default cmsView
+export default contactsView
