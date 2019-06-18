@@ -38,7 +38,7 @@ export class Login extends Component  {
 
     onSubmit = () => { 
       if (this.validateForm()) {
-        AuthenticateAPI.postData('/login',this.state.fields).then((res)=>{ 
+       /*  AuthenticateAPI.postData('/login',this.state.fields).then((res)=>{ 
           console.log("res",res)   
           if(res.status === 200) {
             this.setState({
@@ -56,7 +56,8 @@ export class Login extends Component  {
             })
           }
 
-        }) 
+        })  */
+        this.props.history.push('/dashboard')
       }
     }
 
