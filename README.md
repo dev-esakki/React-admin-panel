@@ -33,6 +33,22 @@ Run `build` to build the project. The build artifacts will be stored in the `bui
 $ npm run build
 ```
 
+### Environmental Files
+
+```bash
+.env.development => for development
+
+.env.staging => for staging
+
+.env.production => for production
+
+every variable must be prefixed with (REACT_APP_)
+
+(ex..) REACT_APP_API_URl=[http://localhost:5000]
+
+Bind this value in any part of the application by using node.js process command {process.env.REACT_APP_API_URl}
+```
+
 ## What's included
 
 Within the download you'll find the following directories and files, logically grouping common assets and providing both compiled and minified variations. You'll see something like this:
